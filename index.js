@@ -23,10 +23,12 @@ client.on('messageCreate', async (message) => {
 });
 
 
-client
-  .login(client.config.token)
+const config = require('./config.json');
+
+
+client.login(config.token)
   .then(() => {
-    console.log(`client logged as ${client.user.username}`);
+    console.log(`client logged in as ${client.user.username}`);
     client.user.setActivity(`${client.guilds.cache.size} guilds`);
   })
-  .catch((err) => console.log(err));
+  .catch(console.error);
