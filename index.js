@@ -23,4 +23,10 @@ client.on('messageCreate', async (message) => {
 });
 
 
-client.login('BOT TOKEN HERE');
+client
+  .login(client.config.token)
+  .then(() => {
+    console.log(`client logged as ${client.user.username}`);
+    client.user.setActivity(`${client.guilds.cache.size} guilds`);
+  })
+  .catch((err) => console.log(err));
