@@ -12,12 +12,15 @@ client.once('ready', () => {
   console.log(`Bot is online as ${client.user.tag}`);
 });
 
-client.on('messageCreate', (message) => {
+client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
   if (message.content.toLowerCase() === '!ping') {
-    message.channel.send('Pong!');
+    const sent = await message.channel.send('Pinging...');
+    const ping = sent.createdTimestamp - message.createdTimestamp;
+    sent.edit(`my ping is ${ping}ms.`);
   }
 });
+
 
 client.login('BOT TOKEN HERE');
